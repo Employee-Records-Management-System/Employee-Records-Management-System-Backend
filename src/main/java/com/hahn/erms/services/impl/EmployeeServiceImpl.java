@@ -5,7 +5,6 @@ import com.hahn.erms.errors.NotAuthorizedException;
 import com.hahn.erms.models.UserDetailsModel;
 import com.hahn.erms.repositories.EmployeeRepository;
 import com.hahn.erms.services.AccountService;
-import com.hahn.erms.services.AuthService;
 import com.hahn.erms.services.EmployeeService;
 import com.hahn.erms.utils.EntityUtils;
 import jakarta.persistence.EntityNotFoundException;
@@ -86,7 +85,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(existingEmployee);
     }
 
-    public void deleteEmployee(Long id) {
+    public void deleteEmployee(Long id, UserDetailsModel userDetails) {
+        Employee existingEmployee = getEmployeeById(id);
+
+        boolean isManager = userDetails.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_MANAGER"));
+
+        if (isManager &&
+                !Objects.equals(existingEmployee.getDepartment().getId(),
+                        userDetails.getAccount()
+                                .getEmployee()
+                                .getDepartment()
+                                .getId())) {
+
+            throw new AccessDeniedException("Managers can only update employees within their own department.");
+        }
         employeeRepository.deleteById(id);
     }
 

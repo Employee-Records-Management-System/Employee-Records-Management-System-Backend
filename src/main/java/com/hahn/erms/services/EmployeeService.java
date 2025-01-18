@@ -14,7 +14,7 @@ public interface EmployeeService {
     Employee createEmployee(Employee Employee);
     Employee updateEmployee(Long id, Employee EmployeeDetails);
     Employee updateEmployeeWithRoleCheck(Long id, Employee employeeDetails, UserDetailsModel userDetails);
-    void deleteEmployee(Long id);
+    void deleteEmployee(Long id, UserDetailsModel userDetails);
     Employee getEmployeeByUsername(String username);
     List<String> getAllEmploymentStatus();
 }

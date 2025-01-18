@@ -63,10 +63,11 @@ public class EmployeeController {
         return ResponseEntity.ok(updatedEmployee);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR', 'ROLE_MANAGER')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
-        employeeService.deleteEmployee(id);
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id, Authentication authentication) {
+        UserDetailsModel userDetails = (UserDetailsModel) authentication.getPrincipal();
+        employeeService.deleteEmployee(id, userDetails);
         return ResponseEntity.noContent().build();
     }
 }
