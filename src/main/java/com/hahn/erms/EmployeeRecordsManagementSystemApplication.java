@@ -16,27 +16,4 @@ public class EmployeeRecordsManagementSystemApplication {
         SpringApplication.run(EmployeeRecordsManagementSystemApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner commandLineRunner(AccountService accountService) {
-        return args -> {
-            accountService.createAccount(Account.builder()
-                    .username("hr")
-                    .password("hr")
-                    .employee(Employee.builder().id(1L).build())
-                    .role(Role.builder().id(1L).build())
-                    .build());
-            accountService.createAccount(Account.builder()
-                    .username("manager")
-                    .password("manager")
-                    .employee(Employee.builder().id(2L).build())
-                    .role(Role.builder().id(2L).build())
-                    .build());
-            accountService.createAccount(Account.builder()
-                    .username("admin")
-                    .password("admin")
-                    .employee(Employee.builder().id(3L).build())
-                    .role(Role.builder().id(3L).build())
-                    .build());
-        };
-    }
 }
