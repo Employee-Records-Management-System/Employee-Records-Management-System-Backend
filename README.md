@@ -74,7 +74,7 @@ The system is built using **Java 17**, **Oracle SQL**, and **Docker** for a robu
 
 Use the following Postman collection to validate the API:
 
-[Postman Collection Link](https://hahn-software-team-8036.postman.co/workspace/My-Workspace~1e2eafa2-3d81-4b1c-8033-c730d525f957/collection/22686153-0f81124d-7a24-4a38-b528-36b5ea2d6e29?action=share&creator=22686153)
+[Postman Collection Link](https://www.postman.com/hahn-software-team-8036/public-workspace/collection/22686153-0f81124d-7a24-4a38-b528-36b5ea2d6e29?action=share&creator=22686153)
 
 ---
 
