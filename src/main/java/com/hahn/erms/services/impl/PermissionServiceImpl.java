@@ -4,6 +4,7 @@ import com.hahn.erms.entities.Permission;
 import com.hahn.erms.repositories.PermissionRepository;
 import com.hahn.erms.services.PermissionService;
 import com.hahn.erms.utils.EntityUtils;
+import com.hahn.erms.utils.ValidationUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,7 @@ public class PermissionServiceImpl implements PermissionService {
     public Permission updatePermission(Long id, Permission permissionDetails) {
         Permission permission = permissionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Permission not found"));
         EntityUtils.copyNonNullProperties(permissionDetails, permission);
+        ValidationUtils.validate(permission);
         return permissionRepository.save(permission);
     }
 

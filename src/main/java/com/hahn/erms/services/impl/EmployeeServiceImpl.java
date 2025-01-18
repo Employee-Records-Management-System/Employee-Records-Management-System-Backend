@@ -7,6 +7,7 @@ import com.hahn.erms.repositories.EmployeeRepository;
 import com.hahn.erms.services.AccountService;
 import com.hahn.erms.services.EmployeeService;
 import com.hahn.erms.utils.EntityUtils;
+import com.hahn.erms.utils.ValidationUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -82,6 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
             employeeDetails.setId(null);
             EntityUtils.copyNonNullProperties(employeeDetails, existingEmployee);
+        ValidationUtils.validate(existingEmployee);
         return employeeRepository.save(existingEmployee);
     }
 

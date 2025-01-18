@@ -4,7 +4,9 @@ import com.hahn.erms.entities.Department;
 import com.hahn.erms.repositories.DepartmentRepository;
 import com.hahn.erms.services.DepartmentService;
 import com.hahn.erms.utils.EntityUtils;
+import com.hahn.erms.utils.ValidationUtils;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Validator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +36,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department updateDepartment(Long id, Department departmentDetails) {
         Department department = departmentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Account not found"));
         EntityUtils.copyNonNullProperties(departmentDetails, department);
+        ValidationUtils.validate(department);
         return departmentRepository.save(department);
     }
 

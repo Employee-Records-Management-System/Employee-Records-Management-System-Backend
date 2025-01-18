@@ -2,6 +2,7 @@ package com.hahn.erms.controllers;
 
 import com.hahn.erms.entities.Permission;
 import com.hahn.erms.services.PermissionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class PermissionController {
     }
 
     @PostMapping
-    public ResponseEntity<Permission> createPermission(@RequestBody Permission permission) {
+    public ResponseEntity<Permission> createPermission(@Valid @RequestBody Permission permission) {
         Permission createdPermission = permissionService.createPermission(permission);
         return new ResponseEntity<>(createdPermission, HttpStatus.CREATED);
     }

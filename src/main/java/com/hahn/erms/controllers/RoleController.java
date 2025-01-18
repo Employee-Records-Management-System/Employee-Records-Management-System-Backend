@@ -2,6 +2,7 @@ package com.hahn.erms.controllers;
 
 import com.hahn.erms.entities.Role;
 import com.hahn.erms.services.RoleService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,13 +33,13 @@ public class RoleController {
     }
 
     @PostMapping
-    public ResponseEntity<Role> createRole(@RequestBody Role role) {
+    public ResponseEntity<Role> createRole(@Valid @RequestBody Role role) {
         Role createdRole = roleService.createRole(role);
         return new ResponseEntity<>(createdRole, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Role> updateRole(@PathVariable Long id, @RequestBody Role roleDetails) {
+    public ResponseEntity<Role> updateRole(@PathVariable Long id,@RequestBody Role roleDetails) {
         Role updatedRole = roleService.updateRole(id, roleDetails);
         return ResponseEntity.ok(updatedRole);
     }

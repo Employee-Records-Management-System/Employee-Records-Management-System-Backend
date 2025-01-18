@@ -4,6 +4,7 @@ import com.hahn.erms.entities.Account;
 import com.hahn.erms.repositories.AccountRepository;
 import com.hahn.erms.services.AccountService;
 import com.hahn.erms.utils.EntityUtils;
+import com.hahn.erms.utils.ValidationUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,7 @@ public class AccountServiceImpl implements AccountService {
     public Account updateAccount(Long id, Account accountDetails) {
         Account account = accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Account with %d not found",id)));
         EntityUtils.copyNonNullProperties(accountDetails, account);
+        ValidationUtils.validate(account);
         if (accountDetails.getPassword() != null && !accountDetails.getPassword().isEmpty()) {
             account.setPassword(passwordEncoder.encode(accountDetails.getPassword()));
         }

@@ -3,6 +3,7 @@ package com.hahn.erms.entities;
 import com.hahn.erms.enums.ContractType;
 import com.hahn.erms.enums.Gender;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -57,6 +58,7 @@ public class Employee {
     private ContractType contractType;
 
     @Embedded
+    @Valid
     private ContactInfo contactInfo;
 
     @NotBlank(message = "Address should not be empty")

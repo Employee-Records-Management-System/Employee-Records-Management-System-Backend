@@ -6,6 +6,7 @@ import com.hahn.erms.repositories.PermissionRepository;
 import com.hahn.erms.repositories.RoleRepository;
 import com.hahn.erms.services.RoleService;
 import com.hahn.erms.utils.EntityUtils;
+import com.hahn.erms.utils.ValidationUtils;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class RoleServiceImpl implements RoleService {
     public Role updateRole(Long id, Role roleDetails) {
         Role role = roleRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Role not found"));
         EntityUtils.copyNonNullProperties(roleDetails, role);
-
+        ValidationUtils.validate(role);
         return roleRepository.save(role);
     }
 
