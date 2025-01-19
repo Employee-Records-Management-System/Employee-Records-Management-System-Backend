@@ -52,7 +52,7 @@ The system is built using **Java 17**, **Oracle SQL**, and **Docker** for a robu
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/zzach666/Employee-Records-Management-System
+   git clone https://github.com/Employee-Records-Management-System/Employee-Records-Management-System
    cd Employee-Records-Management-System
     ```
 2. **Set Up the Database**
